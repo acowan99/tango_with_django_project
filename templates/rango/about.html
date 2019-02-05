@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+{% load staticfiles %} <!--New line -->
+<html>
+	<head>
+		<title>ABOUT</title>
+	</head>
+
+	<body>
+		<h1>This tutorial has been put together by Alexander Cowan</h1>
+		<div>
+		 <a href="/rango/">index</a><br />
+			
+		</div>
+		<div>
+			
+			TIGER <br />
+			<img src="{% static "images/tiger.jpg" %}" alt="Picture of tiger" /> <!-- New line -->
+		</div>
+		<div>
+			CAT <br/>
+		<div>
+			<img src="{{ MEDIA_URL}}cat.jpg"/>
+	</body>
+</html>
