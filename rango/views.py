@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from rango.models import Category
-from django.http import HttpResponse
 from rango.models import Page
+from django.shortcuts import render
+from django.http import HttpResponse
+from rango.models import Category
 from rango.forms import CategoryForm
-from rango.forms import PageForm
+from rango.forms import PageForm
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -13,24 +13,24 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'rango/about.html')
-
-
+    print(request.method)
+    print(request.user)
+    context_dict = {'boldmessage': "Rango says here is the about page."}
+    return render(request, 'rango/about.html', {})
 
 def show_category(request, category_name_slug):
+
     context_dict = {}
+
     try:
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
         context_dict['pages'] = pages
         context_dict['category'] = category
-
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['pages'] = None
-
     return render(request, 'rango/category.html', context_dict)
-
 
 def add_category(request):
     form = CategoryForm()
@@ -38,14 +38,13 @@ def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
-
             form.save(commit=True)
             return index(request)
-
         else:
             print(form.errors)
 
     return render(request, 'rango/add_category.html', {'form': form})
+
 
 def add_page(request, category_name_slug):
     try:
@@ -67,13 +66,7 @@ def add_page(request, category_name_slug):
             print(form.errors)
 
     context_dict = {'form':form, 'category': category}
-    return render(request, 'rango/add_page.html', context_dict)
-
-
-
-
-
-
+    return render(request, 'rango/add_page.html', context_dict) 
 
 
 
