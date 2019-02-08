@@ -11,14 +11,14 @@
 {% block body_block %}
         <h1>About</h1>
 		<h2> This tutorial has been put together by Alexander Cowan <h2/>
-        <div>
-            
+        <p>visits: {{ visits }}</p>
+		<div>
+        
             <strong>{{ boldmessage }}</strong><br />
         </div>
 
         <div>
             <a href="/rango/">Index</a><br />
-			<img src="{% static "images/tiger.jpg" %}"alt="Picture of tiger" /> 
 		</div>
 		<div>
             <img src="{{ MEDIA_URL}}cat.jpg" alt="Picture of a cat" />
